@@ -2,5 +2,14 @@
 {
 	public enum TokenType
 	{
+		Identifier,
+		Keyword,
+		BoolLiteral,
+		NumberLiteral,
+		NullLiteral,
+		CharacterLiteral,
+		StringLiteral,
+		InterpolatedStringLiteral,
+		OperatorPunctuator
 	}
 }
