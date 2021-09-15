@@ -10,6 +10,7 @@
 		CharacterLiteral,
 		StringLiteral,
 		InterpolatedStringLiteral,
-		OperatorPunctuator
+		Operator,
+		Punctuator
 	}
 }

@@ -41,13 +41,24 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			else if (IsOperator())
 			{
 				var token = GetOperator();
-				return new Token(TokenType.OperatorPunctuator, token);
+				return new Token(TokenType.Operator, token);
+			}	
+			else if (IsPunctuator())
+			{
+				var token = GetPunctuator();
+				return new Token(TokenType.Punctuator, token);
 			}
 			else
 			{
 				Console.WriteLine("Can't read symbol - {0}", _code[_currentPos]);
 				return null;
 			}
+		}
+
+		#region GetToken
+		private string GetPunctuator()
+		{
+			return _code[_currentPos++].ToString();
 		}
 
 		private (TokenType, string) GetIdentifier()
@@ -74,19 +85,79 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private string GetOperator()
 		{
-			throw new NotImplementedException();
-		}
-
-		private string GetKeyword()
-		{
-			throw new NotImplementedException();
+			StringBuilder stringBuilder = new StringBuilder();
+			while (IsOperator())
+			{
+				stringBuilder.Append(_code[_currentPos]);
+				_currentPos++;
+			}
+			return stringBuilder.ToString();
 		}
 
 		private (TokenType, string) GetLiteral()
 		{
-			throw new NotImplementedException();
-		}
+			if (_code[_currentPos] == 't' || _code[_currentPos] == 'f' || _code[_currentPos] == 'n')
+			{
+				int pos = _currentPos;
+				var lexem = new StringBuilder();
+				while (char.IsLetter(_code[pos]))
+				{
+					lexem.Append(_code[pos]);
+					pos++;
+				}
+				if (lexem.ToString() == "true" || lexem.ToString() == "false")
+				{
+					_currentPos = pos;
+					return (TokenType.BoolLiteral, lexem.ToString());
+				}
+				else if (lexem.ToString() == "null")
+				{
+					_currentPos = pos;
+					return (TokenType.NullLiteral, lexem.ToString());
+				}
+			}
 
+			if (_code[_currentPos] == '\'')
+			{
+				int startPos = _currentPos;
+				_currentPos++;
+				while (_code[_currentPos] != '\'')
+				{
+					_currentPos++;
+				}
+				//Why +1??? Test
+				return (TokenType.CharacterLiteral, _code.Substring(startPos, _currentPos - startPos + 1));
+			}
+
+			#warning Do normal string handler
+			if (_code[_currentPos] == '"')
+			{
+				int startPos = _currentPos;
+				_currentPos++;
+				while (_code[_currentPos] != '"')
+				{
+					_currentPos++;
+				}
+				return (TokenType.StringLiteral, _code.Substring(startPos, _currentPos - startPos + 1));
+			}
+
+			#warning REDO number handler
+			if (char.IsDigit(_code[_currentPos]) || _code[_currentPos] == '.')
+			{
+				int startPos = _currentPos;
+				_currentPos++;
+				while (char.IsDigit(_code[_currentPos]) || _code[_currentPos] == '.')
+				{
+					_currentPos++;
+				}
+				return (TokenType.NumberLiteral, _code.Substring(startPos, _currentPos - startPos));
+			}
+			return (TokenType.InterpolatedStringLiteral, null);
+		}
+		
+		#endregion
+
+		#region IsTokenType
 		private bool IsOperator()
 		{
 			throw new NotImplementedException();
@@ -102,10 +173,17 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			throw new NotImplementedException();
 		}
 
+		private bool IsPunctuator()
+		{
+			throw new NotImplementedException();
+		}
+
 		private bool IsIdentifier()
 		{
 			throw new NotImplementedException();
 		}
+
+		#endregion
 
 		/// <summary>
 		/// !!!Протестировать

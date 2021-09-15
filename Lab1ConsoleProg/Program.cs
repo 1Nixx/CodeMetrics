@@ -7,9 +7,10 @@ namespace Lab1ConsoleProg
 	{
 		static void Main(string[] args)
 		{
-			var a = new Lexer("aaaaa");
-			a.TokenizeCode();
-			Console.WriteLine(a);
+			var a = new Lexer("025213; <a");
+			
+			int intd;
+			Console.WriteLine("Hello world");
 		}
 	}
 }
