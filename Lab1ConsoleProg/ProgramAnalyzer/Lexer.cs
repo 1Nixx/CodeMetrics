@@ -127,5 +127,15 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			}
 			
 		}
+
+		private void SkipLongComment()
+		{
+			throw new NotImplementedException();
+		}
+
+		private void SkipLine()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

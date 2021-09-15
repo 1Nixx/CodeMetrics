@@ -1,5 +1,4 @@
-﻿using Lab1ConsoleProg.Enties;
-using Lab1ConsoleProg.ProgramAnalyzer;
+﻿using Lab1ConsoleProg.ProgramAnalyzer;
 using System;
 
 namespace Lab1ConsoleProg
@@ -10,7 +9,7 @@ namespace Lab1ConsoleProg
 		{
 			var a = new Lexer("aaaaa");
 			a.TokenizeCode();
-			Console.WriteLine(ass);
+			Console.WriteLine(a);
 		}
 	}
 }

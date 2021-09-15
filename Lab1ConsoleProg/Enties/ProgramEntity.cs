@@ -6,18 +6,18 @@ namespace Lab1ConsoleProg.Enties
 {
 	class ProgramEntity
 	{
-		public readonly ProgramType type;
-		public readonly string value;
+		public ProgramType Type { get; private set; }
+		public string Value { get; private set; }
 
 		public ProgramEntity(ProgramType type, string value)
 		{
-			this.type = type;
-			this.value = value;
+			this.Type = type;
+			this.Value = value;
 		}
 
 		public override string ToString()
 		{
-			return "{ type: " + type.ToString() + "; value: " + value + " }";
+			return "{ type: " + Type.ToString() + "; value: " + Value + " }";
 		}
 	}
 }
