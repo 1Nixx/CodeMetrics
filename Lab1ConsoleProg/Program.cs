@@ -31,8 +31,6 @@ namespace Lab1ConsoleProg
 			{
 				Console.WriteLine($"{p.Value} {p.NumOfRep}");
 			}
-			Console.ReadKey();
-
 		}
 	}
 }
