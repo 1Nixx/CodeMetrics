@@ -154,33 +154,50 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			}
 			return (TokenType.InterpolatedStringLiteral, null);
 		}
-		
+
 		#endregion
 
 		#region IsTokenType
 		private bool IsOperator()
 		{
-			throw new NotImplementedException();
+			return ".:+-*/%&|^!~=<>?".Contains(_code[_currentPos]) ? true : false;
 		}
 
 		private bool IsLiteral()
 		{
-			throw new NotImplementedException();
+			if (char.IsLetter(_code[_currentPos]) && "tfn'\"".Contains(_code[_currentPos]))
+			{
+				return true;
+			}
+			else if (char.IsDigit(_code[_currentPos]) || (_code[_currentPos] == '.' && char.IsDigit(_code[_currentPos+1])))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		private bool IsKeyword(string word)
 		{
-			throw new NotImplementedException();
+			return (" abstract as base bool break byte case catch char checked class const continue decimal default delegate do double else " +
+			"enum event explicit extern finally fixed float for foreach goto if implicit in int interface internal is lock long namespace" +
+			" new object operator out override params private protected public readonly ref return sbyte sealed short sizeof stackalloc static" +
+			" string struct switch this throw try typeof uint ulong unchecked unsafe ushort using virtual void volatile while ").Contains(" " + word + " ") ? true : false;
 		}
 
 		private bool IsPunctuator()
 		{
-			throw new NotImplementedException();
+			return "{}[](),;".Contains(_code[_currentPos]) ? true : false;
 		}
 
 		private bool IsIdentifier()
 		{
-			throw new NotImplementedException();
+			if (char.IsLetter(_code[_currentPos]) || (_code[_currentPos] == '@' && char.IsLetter(_code[_currentPos + 1])))
+				return true;
+			else
+				return false;
 		}
 
 		#endregion
@@ -208,12 +225,21 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private void SkipLongComment()
 		{
-			throw new NotImplementedException();
+			_currentPos += 2;
+			while (_code[_currentPos] != '*' && _code[_currentPos+1] != '/')
+			{
+				_currentPos++;
+			}
+			_currentPos += 2;
 		}
 
 		private void SkipLine()
 		{
-			throw new NotImplementedException();
+			while (_code[_currentPos] != '\n')
+			{
+				_currentPos++;
+			}
+			_currentPos++;
 		}
 	}
 }
