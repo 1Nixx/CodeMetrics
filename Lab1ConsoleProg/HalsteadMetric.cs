@@ -14,6 +14,5 @@ namespace Lab1ConsoleProg
 			this.programEntities = (List<ProgramEntity>)programEntities;
 		}
 
-
 	}
 }
