@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Lab1ConsoleProg.ProgramAnalyzer
 {
+#warning Fix bug out of range exceprion in _currentPos++ and  etc.
+#warning Fix bug Reading of strings/char literals
 	class Lexer
 	{
 		private readonly string _code;
@@ -20,7 +22,10 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			while (_currentPos < _code.Length)
 			{
 				var token = GetNextToken();
-				tokenList.Add(token);
+				if (token != null)
+				{
+					tokenList.Add(token);
+				}
 			}
 			return tokenList;
 		}
@@ -50,7 +55,8 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			}
 			else
 			{
-				Console.WriteLine("Can't read symbol - {0}", _code[_currentPos]);
+				Console.WriteLine("Can't read symbol - {0}, {1}", _code[_currentPos], _currentPos);
+				_currentPos++;
 				return null;
 			}
 		}
@@ -207,10 +213,9 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 		/// </summary>
 		private void SkipEmptyСharacters()
 		{
-			List<char> lineTerminators = new List<char> { '\u000D', '\u000A', '\u0085', '\u2028', '\u2029', ' ' };
+			List<char> lineTerminators = new List<char> { '\u000D', '\u000A', '\u0085', '\u2028', '\u2029', ' ', '\t', '\n' };
 			while (lineTerminators.Contains(_code[_currentPos]) || _code[_currentPos] == '/' || _code[_currentPos] == '#')
 			{
-				_currentPos++;
 				if (_code[_currentPos] == '/' && _code[_currentPos + 1] == '/')
 					SkipLine();
 
@@ -219,6 +224,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 				if (_code[_currentPos] == '#')
 					SkipLine();
+				_currentPos++;
 			}
 			
 		}
@@ -226,7 +232,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 		private void SkipLongComment()
 		{
 			_currentPos += 2;
-			while (_code[_currentPos] != '*' && _code[_currentPos+1] != '/')
+			while (_code[_currentPos] != '*' || _code[_currentPos+1] != '/')
 			{
 				_currentPos++;
 			}
