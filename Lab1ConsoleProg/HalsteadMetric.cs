@@ -29,20 +29,15 @@ namespace Lab1ConsoleProg
 									   programEntities = from p in g select p
 								   };
 
-
 			foreach (var group in ExpressionGroups)
 			{
-				foreach (ProgramEntity ProgramEntity in group.programEntities)
+				if (ProgramType.Operand == group.programEntities.First().Type)
 				{
-					if (ProgramType.Operand == ProgramEntity.Type)
-					{
-						ListOfOperands.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
-					}
-					else
-					{
-						ListOfOperators.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
-					}
-					break;
+					ListOfOperands.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
+				}
+				else
+				{
+					ListOfOperators.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
 				}
 			}
 
