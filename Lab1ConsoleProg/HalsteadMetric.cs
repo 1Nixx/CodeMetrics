@@ -62,43 +62,43 @@ namespace Lab1ConsoleProg
 			int LenOfProgram = TotalNumOfOperands + TotalNumOfOperators;
 			int VolumeOfProgram = (int)(LenOfProgram * Math.Log(DictionaryOfProgram, 2));
 
-			static int GetNumOfUniqueOperands(List<OperandsAndOperators> NumOfUniqueOperands)
-			{
-				int count = NumOfUniqueOperands.Count;
-				return count;
-			}
-
-			static int GetNumOfUniqueOperators(List<OperandsAndOperators> NumOfUniqueOperators)
-			{
-				int count = NumOfUniqueOperators.Count;
-				return count;
-			}
-
-			static int GetTotalNumOfOperands(List<OperandsAndOperators> TotalNumOfOperands)
-			{
-				int count = 0;
-				foreach (OperandsAndOperators p in TotalNumOfOperands)
-				{
-					count += p.NumOfRep;
-				}
-				return count;
-			}
-
-			static int GetTotalNumOfOperators(List<OperandsAndOperators> TotalNumOfOperators)
-			{
-				int count = 0;
-				foreach (OperandsAndOperators p in TotalNumOfOperators)
-				{
-					count += p.NumOfRep;
-				}
-				return count;
-			}
-
 			return new HalsteadMetricReturn { ListOfOperands = ListOfOperands, ListOfOperators = ListOfOperators, NumOfUniqueOperands = NumOfUniqueOperands, NumOfUniqueOperators = NumOfUniqueOperators, TotalNumOfOperands = TotalNumOfOperands, TotalNumOfOperators = TotalNumOfOperators, DictionaryOfProgram = DictionaryOfProgram, LenOfProgram = LenOfProgram, VolumeOfProgram = VolumeOfProgram };
 
+		}
+
+		static int GetNumOfUniqueOperands(List<OperandsAndOperators> NumOfUniqueOperands)
+		{
+			int count = NumOfUniqueOperands.Count;
+			return count;
+		}
+
+		static int GetNumOfUniqueOperators(List<OperandsAndOperators> NumOfUniqueOperators)
+		{
+			int count = NumOfUniqueOperators.Count;
+			return count;
+		}
+
+		static int GetTotalNumOfOperands(List<OperandsAndOperators> TotalNumOfOperands)
+		{
+			int count = 0;
+			foreach (OperandsAndOperators p in TotalNumOfOperands)
+			{
+				count += p.NumOfRep;
+			}
+			return count;
+		}
+
+		static int GetTotalNumOfOperators(List<OperandsAndOperators> TotalNumOfOperators)
+		{
+			int count = 0;
+			foreach (OperandsAndOperators p in TotalNumOfOperators)
+			{
+				count += p.NumOfRep;
+			}
+			return count;
+		}
 	}
 
-	}
 
 	class OperandsAndOperators
 	{
@@ -107,17 +107,4 @@ namespace Lab1ConsoleProg
 
 	}
 
-	class HalsteadMetricReturn
-	{
-		public List<OperandsAndOperators> ListOfOperands { get; set; }
-		public List<OperandsAndOperators> ListOfOperators { get; set; }
-		public int NumOfUniqueOperands { get; set; }
-		public int NumOfUniqueOperators { get; set; }
-		public int TotalNumOfOperands { get; set; }
-		public int TotalNumOfOperators { get; set; }
-		public int DictionaryOfProgram { get; set; }
-		public int LenOfProgram { get; set; }
-		public int VolumeOfProgram { get; set; }
-
-	}
 }
