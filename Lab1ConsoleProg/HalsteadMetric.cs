@@ -18,7 +18,7 @@ namespace Lab1ConsoleProg
 			this.programEntities = (List<ProgramEntity>)programEntities;
 		}
 
-		public void CreateListsOfOperandsAndOperators()
+		public HalsteadMetricReturn CreateListsOfOperandsAndOperators()
 		{	
 			var ExpressionGroups = from ProgramEntity in programEntities
 								   group ProgramEntity by ProgramEntity.Value into g
@@ -94,7 +94,9 @@ namespace Lab1ConsoleProg
 				return count;
 			}
 
-		}
+			return new HalsteadMetricReturn { ListOfOperands = ListOfOperands, ListOfOperators = ListOfOperators, NumOfUniqueOperands = NumOfUniqueOperands, NumOfUniqueOperators = NumOfUniqueOperators, TotalNumOfOperands = TotalNumOfOperands, TotalNumOfOperators = TotalNumOfOperators, DictionaryOfProgram = DictionaryOfProgram, LenOfProgram = LenOfProgram, VolumeOfProgram = VolumeOfProgram };
+
+	}
 
 	}
 
@@ -102,6 +104,20 @@ namespace Lab1ConsoleProg
 	{
 		public string Value { get; set; }
 		public int NumOfRep { get; set; }
+
+	}
+
+	class HalsteadMetricReturn
+	{
+		public List<OperandsAndOperators> ListOfOperands { get; set; }
+		public List<OperandsAndOperators> ListOfOperators { get; set; }
+		public int NumOfUniqueOperands { get; set; }
+		public int NumOfUniqueOperators { get; set; }
+		public int TotalNumOfOperands { get; set; }
+		public int TotalNumOfOperators { get; set; }
+		public int DictionaryOfProgram { get; set; }
+		public int LenOfProgram { get; set; }
+		public int VolumeOfProgram { get; set; }
 
 	}
 }
