@@ -6,7 +6,7 @@ namespace LabaLongArithm
 	{
 		public static int IsItPalyndrome(string a)
 		{
-			var Check = 0;
+			int Check = 0;
 			for (int i = 0; i <= a.Length - 1; i++)
 			{
 				if (a[i] == a[a.Length - 1 - i])
@@ -20,7 +20,7 @@ namespace LabaLongArithm
 
 		public static int IsItPalyndrome(int[] arr)
 		{
-			var Check = 0;
+			int Check = 0;
 			for (int i = 0; i <= arr.Length - 1; i++)
 			{
 				if (arr[i] == arr[arr.Length - 1 - i])
@@ -54,7 +54,7 @@ namespace LabaLongArithm
 
 		public static int[] DeleteZero(int[] arr)
 		{
-			var i = 0;
+			int i = 0;
 			if (arr[0] == 0)
 			{
 				i = 1;

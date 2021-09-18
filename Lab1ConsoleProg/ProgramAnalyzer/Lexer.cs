@@ -5,7 +5,6 @@ using System.Text;
 namespace Lab1ConsoleProg.ProgramAnalyzer
 {
 #warning Fix bug out of range exceprion in _currentPos++ and  etc.
-#warning Fix bug Reading of strings/char literals
 	class Lexer
 	{
 		private readonly string _code;
@@ -86,6 +85,17 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 			TokenType tokenType = IsKeyword(lexem) ? TokenType.Keyword : TokenType.Identifier;
 
+			if (tokenType == TokenType.Keyword)
+			{
+				if (" true false ".Contains(" " + lexem + " "))
+				{
+					return (TokenType.BoolLiteral, lexem);
+				}
+				else if (" null ".Contains(" " + lexem + " "))
+				{
+					return (TokenType.NullLiteral, lexem);
+				}
+			}
 			return (tokenType, lexem);
 		}
 
@@ -131,8 +141,8 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				{
 					_currentPos++;
 				}
-				//Why +1??? Test
-				return (TokenType.CharacterLiteral, _code.Substring(startPos, _currentPos - startPos + 1));
+				_currentPos++;
+				return (TokenType.CharacterLiteral, _code.Substring(startPos, _currentPos - startPos));
 			}
 
 			#warning Do normal string handler
@@ -144,7 +154,8 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				{
 					_currentPos++;
 				}
-				return (TokenType.StringLiteral, _code.Substring(startPos, _currentPos - startPos + 1));
+				_currentPos++;
+				return (TokenType.StringLiteral, _code.Substring(startPos, _currentPos - startPos));
 			}
 
 			#warning REDO number handler
@@ -179,6 +190,10 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			{
 				return true;
 			}
+			else if (_code[_currentPos] == '\'' || _code[_currentPos] == '\"')
+			{
+				return true;
+			}
 			else
 			{
 				return false;
@@ -190,7 +205,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			return (" abstract as base bool break byte case catch char checked class const continue decimal default delegate do double else " +
 			"enum event explicit extern finally fixed float for foreach goto if implicit in int interface internal is lock long namespace" +
 			" new object operator out override params private protected public readonly ref return sbyte sealed short sizeof stackalloc static" +
-			" string struct switch this throw try typeof uint ulong unchecked unsafe ushort using virtual void volatile while ").Contains(" " + word + " ") ? true : false;
+			" string struct switch this throw try typeof uint ulong unchecked unsafe ushort using virtual void volatile while true false null ").Contains(" " + word + " ") ? true : false;
 		}
 
 		private bool IsPunctuator()
