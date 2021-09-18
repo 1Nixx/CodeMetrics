@@ -12,15 +12,14 @@ namespace Lab1ConsoleProg
 		{
 			List<ProgramEntity> programEntities = new List<ProgramEntity>(){
 				new ProgramEntity(ProgramType.Operand,"for"),
-				new ProgramEntity(ProgramType.Operator,"x"),
 				new ProgramEntity(ProgramType.Operand,"while"),
 				new ProgramEntity(ProgramType.Operand,"while"),
 				new ProgramEntity(ProgramType.Operand,"for"),
-				new ProgramEntity(ProgramType.Operator,"x")
+				new ProgramEntity(ProgramType.Operator,"y")
 			};
 
 			HalsteadMetric metric = new HalsteadMetric(programEntities);
-			metric.CalculateMetric();
+			metric.CreateListsOfOperandsAndOperators();
 
 			foreach (OperandsAndOperators p in metric.ListOfOperands)
 			{
