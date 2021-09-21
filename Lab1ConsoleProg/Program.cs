@@ -12,8 +12,9 @@ namespace Lab1ConsoleProg
 
 			var a = new Lexer(stream.ReadToEnd());
 			stream.Close();
-			var tokens = a.TokenizeCode();
-			foreach (var item in tokens)
+			var items = new Parcer(a.TokenizeCode()).Parce();
+
+			foreach (var item in items)
 			{
 				Console.WriteLine("Type : {0, 13} Value : {1}", item.Type, item.Value);
 			}

@@ -223,9 +223,6 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		#endregion
 
-		/// <summary>
-		/// !!!Протестировать
-		/// </summary>
 		private void SkipEmptyСharacters()
 		{
 			List<char> lineTerminators = new List<char> { '\u000D', '\u000A', '\u0085', '\u2028', '\u2029', ' ', '\t', '\n' };
