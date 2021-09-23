@@ -228,14 +228,12 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			stringBuilder.Append("try");
 
 			var bracket = GetPairBracket(_currentPos + 1);
-			_currentPos++;
 			if (tokens[bracket.pos + 1].Value == "catch")
 			{
 				var catchBrackets = bracket;
 				while (tokens[catchBrackets.pos + 1].Value == "catch")
 				{
 					int bracketPos;
-					_skipTokensInd.Add(catchBrackets.pos + 1);
 					if (tokens[catchBrackets.pos + 2].Value == "(")
 					{
 						stringBuilder.Append("..catch()");
@@ -252,7 +250,6 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				}
 				if (tokens[bracket.pos + 1].Value == "finaly")
 				{
-					_skipTokensInd.Add(bracket.pos + 1);
 					stringBuilder.Append("..finaly");
 				}
 				return stringBuilder.ToString();
@@ -317,23 +314,9 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private bool IsGeneric(List<Token> tokenList)
 		{
-			int counter = 0;
-			while (counter < tokenList.Count && tokenList[counter].Type == TokenType.Identifier)
-			{
-				if (tokenList[counter].Type == TokenType.Identifier)
-				{
-					counter++;
-					if (counter < tokenList.Count && tokenList[counter].Value == ",")
-					{
-						counter++;
-					}
-				}
-				else
-				{
-					return false;
-				}
-			}
-			return true;
+
+
+			return false;
 		}
 	}
 }
