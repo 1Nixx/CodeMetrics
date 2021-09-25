@@ -18,7 +18,7 @@ namespace HelsteadMetricAPI.Controllers
 		{
 		}
 
-		[HttpGet]
+		[HttpPost]
 		public async Task<ActionResult<HalsteadMetricReturn>> GetMetric()
 		{
 			using (var reader = new StreamReader(Request.Body))
