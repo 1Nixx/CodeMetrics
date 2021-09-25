@@ -318,10 +318,11 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 		private bool IsGeneric(List<Token> tokenList)
 		{
 			int counter = 0;
-			while (counter < tokenList.Count && tokenList[counter].Type == TokenType.Identifier)
+			bool isGeneric = true;
+			while (counter < tokenList.Count && isGeneric)
 			{
-				if (tokenList[counter].Type == TokenType.Identifier)
-				{
+				if (tokenList[counter].Type == TokenType.Identifier || tokenList[counter].Type == TokenType.Keyword)
+				{ 
 					counter++;
 					if (counter < tokenList.Count && tokenList[counter].Value == ",")
 					{
@@ -330,10 +331,10 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				}
 				else
 				{
-					return false;
+					isGeneric = false;
 				}
 			}
-			return true;
+			return isGeneric;
 		}
 	}
 }
