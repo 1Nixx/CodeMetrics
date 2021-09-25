@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Lab1ConsoleProg
 {
-	class HalsteadMetric
+	public class HalsteadMetric
 	{
 		private readonly List<ProgramEntity> programEntities;
 
@@ -95,7 +95,7 @@ namespace Lab1ConsoleProg
 	}
 
 
-	class OperandsAndOperators
+	public class OperandsAndOperators
 	{
 		public string Value { get; set; }
 		public int NumOfRep { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 namespace Lab1ConsoleProg.ProgramAnalyzer
 {
 #warning Fix bug out of range exceprion in _currentPos++ and  etc.
-	class Lexer
+	public class Lexer
 	{
 		private readonly string _code;
 		private int _currentPos = 0;

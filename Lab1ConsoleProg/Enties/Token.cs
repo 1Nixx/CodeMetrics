@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab1ConsoleProg
 {
-	class Token
+	public class Token
 	{
 		public TokenType Type { get; private set; }
 		public string Value { get; private set; }

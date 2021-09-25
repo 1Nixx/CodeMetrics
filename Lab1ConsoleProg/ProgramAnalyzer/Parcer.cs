@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab1ConsoleProg.ProgramAnalyzer
 {
-	class Parcer
+	public class Parcer
 	{
 		private readonly List<Token> tokens;
 		private HashSet<int> _skipTokensInd = new HashSet<int>();

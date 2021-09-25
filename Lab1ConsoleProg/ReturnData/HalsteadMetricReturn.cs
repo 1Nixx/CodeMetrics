@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab1ConsoleProg
 {
-	class HalsteadMetricReturn
+	public class HalsteadMetricReturn
 	{
 		public List<OperandsAndOperators> ListOfOperands { get; set; }
 		public List<OperandsAndOperators> ListOfOperators { get; set; }

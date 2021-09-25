@@ -16,7 +16,11 @@ namespace Lab1ConsoleProg
 			//var items = a.TokenizeCode();
 			stream.Close();
 			var items = new Parcer(a.TokenizeCode()).Parce();
-			HalsteadMetric metric = new HalsteadMetric(items);
+			foreach (var item in items)
+			{
+				Console.WriteLine("Type : {0, 10} Value : {1}", item.Type, item.Value);
+			}
+			/*HalsteadMetric metric = new HalsteadMetric(items);
 			var metricData = metric.CreateListsOfOperandsAndOperators();
 			//var items = a.TokenizeCode();
 			foreach (var item in metricData.ListOfOperands)
@@ -29,7 +33,7 @@ namespace Lab1ConsoleProg
 			foreach (var item in metricData.ListOfOperators)
 			{
 				Console.WriteLine("Numb : {0, 5} Value : {1}", item.NumOfRep, item.Value);
-			}
+			}*/
 		}
 	}
 }
