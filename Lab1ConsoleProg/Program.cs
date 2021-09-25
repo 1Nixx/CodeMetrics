@@ -1,4 +1,5 @@
-﻿using Lab1ConsoleProg.ProgramAnalyzer;
+﻿using Lab1ConsoleProg.Enties;
+using Lab1ConsoleProg.ProgramAnalyzer;
 using System;
 using System.IO;
 
