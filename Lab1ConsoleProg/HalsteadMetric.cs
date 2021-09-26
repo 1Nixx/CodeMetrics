@@ -33,11 +33,11 @@ namespace Lab1ConsoleProg
 			{
 				if (ProgramType.Operand == group.programEntities.First().Type)
 				{
-					ListOfOperands.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
+					ListOfOperands.Add(new OperandsAndOperators() { ValueText = group.Value, NumOfRep = group.Count });
 				}
 				else
 				{
-					ListOfOperators.Add(new OperandsAndOperators() { Value = group.Value, NumOfRep = group.Count });
+					ListOfOperators.Add(new OperandsAndOperators() { ValueText = group.Value, NumOfRep = group.Count });
 				}
 			}
 
