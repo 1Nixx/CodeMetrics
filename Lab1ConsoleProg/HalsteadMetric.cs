@@ -97,7 +97,7 @@ namespace Lab1ConsoleProg
 
 	public class OperandsAndOperators
 	{
-		public string Value { get; set; }
+		public string ValueText { get; set; }
 		public int NumOfRep { get; set; }
 
 	}

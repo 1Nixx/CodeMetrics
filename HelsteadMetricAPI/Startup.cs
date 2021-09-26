@@ -24,7 +24,7 @@ namespace HelsteadMetricAPI
 			{
 				opt.AddPolicy("CorsPolicy", policy =>
 				{
-					policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+					policy.AllowAnyOrigin();
 				});
 			});
 		}
