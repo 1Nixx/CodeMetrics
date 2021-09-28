@@ -55,7 +55,14 @@ namespace Lab1ConsoleProg
 			int TotalNumOfOperators = GetTotalNumOfOperators(ListOfOperators);
 			int DictionaryOfProgram = NumOfUniqueOperands + NumOfUniqueOperators;
 			int LenOfProgram = TotalNumOfOperands + TotalNumOfOperators;
-			int VolumeOfProgram = (int)(LenOfProgram * Math.Log(DictionaryOfProgram, 2));
+			int VolumeOfProgram;
+			if (LenOfProgram != 0)
+            {
+				VolumeOfProgram = (int)(LenOfProgram * Math.Log(DictionaryOfProgram, 2));
+			} else
+            {
+				VolumeOfProgram = 0;
+			}
 
 			return new HalsteadMetricReturn { ListOfOperands = ListOfOperands, ListOfOperators = ListOfOperators, NumOfUniqueOperands = NumOfUniqueOperands, NumOfUniqueOperators = NumOfUniqueOperators, TotalNumOfOperands = TotalNumOfOperands, TotalNumOfOperators = TotalNumOfOperators, DictionaryOfProgram = DictionaryOfProgram, LenOfProgram = LenOfProgram, VolumeOfProgram = VolumeOfProgram };
 
