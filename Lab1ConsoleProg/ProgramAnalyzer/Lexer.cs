@@ -139,19 +139,26 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				_currentPos++;
 				while (_code[_currentPos] != '\'')
 				{
+					if (_code[_currentPos] == '\\')
+					{
+						_currentPos++;
+					}
 					_currentPos++;
 				}
 				_currentPos++;
 				return (TokenType.CharacterLiteral, _code.Substring(startPos, _currentPos - startPos));
 			}
 
-			#warning Do normal string handler
 			if (_code[_currentPos] == '"')
 			{
 				int startPos = _currentPos;
 				_currentPos++;
 				while (_code[_currentPos] != '"')
 				{
+					if (_code[_currentPos] == '\\')
+					{
+						_currentPos++;
+					}
 					_currentPos++;
 				}
 				_currentPos++;
@@ -179,7 +186,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 		{
 			return ".:+-*/%&|^!~=<>?".Contains(_code[_currentPos]) ? true : false;
 		}
-
+		
 		private bool IsLiteral()
 		{
 			if (char.IsLetter(_code[_currentPos]) && "tfn'\"".Contains(_code[_currentPos]))
