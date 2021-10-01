@@ -223,7 +223,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private bool IsIdentifier()
 		{
-			if (char.IsLetter(_code[_currentPos]) || ((_code[_currentPos] == '@' || _code[_currentPos] == '_') && char.IsLetter(_code[_currentPos + 1])))
+			if (char.IsLetter(_code[_currentPos]) || ((_code[_currentPos] == '@') && (char.IsLetter(_code[_currentPos + 1]) || _code[_currentPos + 1] == '_')) || _code[_currentPos] == '_')
 				return true;
 			else
 				return false;
