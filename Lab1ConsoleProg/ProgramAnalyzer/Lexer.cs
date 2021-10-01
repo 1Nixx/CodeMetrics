@@ -78,7 +78,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			else
 				throw new FormatException();
 
-			while (char.IsLetterOrDigit(_code[_currentPos]))
+			while (char.IsLetterOrDigit(_code[_currentPos]) || _code[_currentPos] == '_')
 				_currentPos++;
 
 			string lexem = _code.Substring(startPos, _currentPos - startPos);
@@ -96,6 +96,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 					return (TokenType.NullLiteral, lexem);
 				}
 			}
+
 			return (tokenType, lexem);
 		}
 
