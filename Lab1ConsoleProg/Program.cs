@@ -12,7 +12,7 @@ namespace Lab1ConsoleProg
 			StreamReader stream = new StreamReader(@"..\..\..\Data\TextFile1.txt");
 
 			var a = new Lexer(stream.ReadToEnd());
-			//var a = new Lexer("List<Token>;");
+			//var a = new Lexer("int __;");
 			//var items = a.TokenizeCode();
 			stream.Close();
 			var items = new Parcer(a.TokenizeCode()).Parce();
