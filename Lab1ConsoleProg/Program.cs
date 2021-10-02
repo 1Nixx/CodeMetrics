@@ -9,12 +9,12 @@ namespace Lab1ConsoleProg
 	{
 		static void Main(string[] args)
 		{
-			StreamReader stream = new StreamReader(@"..\..\..\Data\TextFile1.txt");
+			//StreamReader stream = new StreamReader(@"..\..\..\Data\TextFile1.txt");
 
-			var a = new Lexer(stream.ReadToEnd());
-			//var a = new Lexer("int __;");
+			//var a = new Lexer(stream.ReadToEnd());
+			var a = new Lexer("int __;");
 			//var items = a.TokenizeCode();
-			stream.Close();
+			//stream.Close();
 			var items = new Parcer(a.TokenizeCode()).Parce();
 			foreach (var item in items)
 			{
