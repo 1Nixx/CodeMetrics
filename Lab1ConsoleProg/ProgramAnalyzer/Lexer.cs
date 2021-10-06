@@ -235,19 +235,20 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 		private void SkipEmptyСharacters()
 		{
 			List<char> lineTerminators = new List<char> { '\u000D', '\u000A', '\u0085', '\u2028', '\u2029', ' ', '\t', '\n' };
-			while (lineTerminators.Contains(_code[_currentPos]) || _code[_currentPos] == '/' || _code[_currentPos] == '#')
+			while (_currentPos < _code.Length && (lineTerminators.Contains(_code[_currentPos]) 
+					|| (_code[_currentPos] == '/' && _code[_currentPos + 1] == '/') 
+					|| (_code[_currentPos] == '/' && _code[_currentPos + 1] == '*') 
+					|| (_code[_currentPos] == '#')))
 			{
 				if (_code[_currentPos] == '/' && _code[_currentPos + 1] == '/')
 					SkipLine();
-
-				if (_code[_currentPos] == '/' && _code[_currentPos + 1] == '*')
+				else if (_code[_currentPos] == '/' && _code[_currentPos + 1] == '*')
 					SkipLongComment();
-
-				if (_code[_currentPos] == '#')
+				else if (_code[_currentPos] == '#')
 					SkipLine();
-				_currentPos++;
-			}
-			
+				else
+					_currentPos++;
+			}			
 		}
 
 		private void SkipLongComment()
