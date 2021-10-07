@@ -1,14 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 body {
     background: #edeef0;
   }
-  
+
   .box {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .input_text {
     resize: none;
     position: absolute;
@@ -16,7 +15,7 @@ body {
     width: 1000px;
     height: 600px;
   }
-  
+
   .shine-button {
     display: inline-block;
     padding: 10px 30px;
@@ -30,7 +29,7 @@ body {
     color: #fe6637;
     transition: .2s ease-in-out;
   }
-  
+
   .shine-button:before {
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
@@ -41,25 +40,25 @@ body {
     left: -75px;
     transform: skewX(-45deg);
   }
-  
+
   .shine-button:hover {
     text-decoration: none;
     background: #fe6637;
     color: #fff;
   }
-  
+
   .shine-button:hover:before {
     left: 150px;
     transition: .5s ease-in-out;
   }
-  
+
   .nameOfTheMetric {
     position: absolute;
     font-size: 25px;
     top: 1%;
     color: #fe6637;
   }
-  
+
   .resultOfTheMetric {
     display: flex;
     text-align: center;
@@ -69,49 +68,49 @@ body {
     top: 2%;
     color: #fe6637;
   }
-  
+
   th {
     background: #BCEBDD;
     color: black;
     text-shadow: 0 1px 1px #2D2020;
     padding: 10px 20px;
   }
-  
+
   td {
     padding: 10px 20px;
     background: #F8E391;
   }
-  
+
   .tableOfOperators {
     position: absolute;
     top: 8%;
     left: 31%;
   }
-  
+
   .tableOfOperands {
     position: absolute;
     top: 8%;
     left: 55%;
   }
-  
+
   .nameOfTheTableOfOperands {
     table-layout: fixed;
     font-size: 21px;
     text-align: center;
   }
-  
+
   .nameOfTheTableOfOperators {
     table-layout: fixed;
     font-size: 21px;
     text-align: center;
   }
-  
+
   #btn {
     position: absolute;
     top: 2%;
     left: 90%;
   }
-  
+
   .table-scroll1,
   .table-scroll2
   {
@@ -127,15 +126,15 @@ body {
     font-size: 14px;
     text-align: center;
   }
-  
+
   .table-scroll1 {
     left: 16%;
   }
-  
+
   .table-scroll2 {
     left: 53%;
   }
-  
+
   .table-scroll1 table,
   .table-scroll2 table
   {
@@ -145,11 +144,11 @@ body {
     border-collapse: separate;
     border-spacing: 0;
   }
-  
+
   .table-wrap {
     position: relative;
   }
-  
+
   .table-scroll1 th,
   .table-scroll1 td,
   .table-scroll2 th,
@@ -163,7 +162,7 @@ body {
     border-color: white;
     word-break: break-all;
   }
-  
+
   .table-scroll1 thead th,
   .table-scroll2 thead th
   {
@@ -172,13 +171,13 @@ body {
     position: sticky;
     top: 0;
   }
-  
+
   .table-scroll1 tbody td,
   .table-scroll2 tbody td
   {
     text-align: center;
   }
-  
+
   .table-scroll1 tfoot,
   .table-scroll1 tfoot th,
   .table-scroll1 tfoot td,
@@ -192,7 +191,7 @@ body {
     bottom: 0;
     z-index:4;
   }
-  
+
   .nameOfTheTable1,
   .nameOfTheTable2
   {
@@ -200,17 +199,17 @@ body {
     font-size: 25px;
     color: gray;
   }
-  
+
   .nameOfTheTable1 {
     left: 29%;
     top: 7%;
   }
-  
+
   .nameOfTheTable2 {
     left: 66%;
     top: 7%;
   }
-  
+
   .table-scroll1::-webkit-scrollbar,
   .input_text::-webkit-scrollbar,
   .table-scroll2::-webkit-scrollbar
@@ -218,14 +217,14 @@ body {
     display: block;
     width: 8px;
   }
-  
+
   .table-scroll1::-webkit-scrollbar-track,
   .input_text::-webkit-scrollbar-track,
   .table-scroll2::-webkit-scrollbar-track
   {
     background: transparent;
   }
-  
+
   .table-scroll1::-webkit-scrollbar-thumb,
   .input_text::-webkit-scrollbar-thumb,
   .table-scroll2::-webkit-scrollbar-thumb
@@ -235,36 +234,36 @@ body {
     border-left: none;
     border-radius: 10px;
   }
-  
+
   .table-scroll1::-webkit-scrollbar-track-piece:end,
   .table-scroll2::-webkit-scrollbar-track-piece:end
   {
     background: transparent;
     margin-bottom: 30px;
   }
-  
+
   .input_text::-webkit-scrollbar-track-piece:end
   {
     background: transparent;
   }
-  
+
   .table-scroll1::-webkit-scrollbar-track-piece:start,
   .table-scroll2::-webkit-scrollbar-track-piece:start
   {
     background: transparent;
     margin-top: 30px;
   }
-  
+
   .input_text::-webkit-scrollbar-track-piece:start
   {
     background: transparent;
   }
-  
+
   .txtOfMetric {
     color: orange;
     font-weight: bold;
   }
-  
+
   .metricFrame {
     position: absolute;
     font-size: 25px;
@@ -275,7 +274,7 @@ body {
     top: 580px;
     text-shadow: 0 1px 0 #2b2929;
   }
-  
+
   .authors {
     font-family: 'Comic Sans MS, Comic Sans, cursive', serif;
     font-weight: bold;
@@ -284,4 +283,3 @@ body {
     top: 95%;
     left: 78%;
   }
-  
