@@ -63,14 +63,18 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 					_skipTokensInd.Add(bracket.pos);
 					return new ProgramEntity(ProgramType.Operator, tokens[count].Value + bracket.bracket);
 				}
-				else if (",;".Contains(tokens[_currentPos].Value))
+				else if (";".Contains(tokens[_currentPos].Value))
 				{
 					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
+				}/*
+				else if (tokens[_currentPos].Value == ",")
+				{
+					_currentPos++;
 				}
 				else
 				{
 					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
-				}
+				}*/
 			}
 			else if (tokens[_currentPos].Type == TokenType.Identifier)
 			{
