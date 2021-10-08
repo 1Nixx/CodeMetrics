@@ -208,6 +208,10 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				_skipTokensInd.Add(bracket.pos);
 				return tokens[_currentPos++ - 1].Value + "()";
 			}
+			else if (" byte sbyte short ushort int uint long ulong float double decimal char bool object string ".Contains(" " + tokens[_currentPos].Value + " "))
+			{
+				return null;
+			}
 			else
 			{
 				return tokens[_currentPos++].Value;
