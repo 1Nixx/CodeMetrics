@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lab1ConsoleProg\HalsteadMetric-Lab1.csproj" />
+    <ProjectReference Include="..\Lab1ConsoleProg\Metrics.csproj" />
   </ItemGroup>
 
 
