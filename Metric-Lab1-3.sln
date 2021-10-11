@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metrics", "Lab1ConsoleProg\Metrics.csproj", "{792A2DA4-816A-460F-9506-A7D3FF873268}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelsteadMetricAPI", "HelsteadMetricAPI\HelsteadMetricAPI.csproj", "{75FDCD17-3E2E-416E-8754-9F73373D4E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "HelsteadMetricAPI\API.csproj", "{75FDCD17-3E2E-416E-8754-9F73373D4E62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
