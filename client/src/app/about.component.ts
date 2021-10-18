@@ -52,25 +52,25 @@ import { Router } from "@angular/router";
           </table>
         </div>
         <div class="metricFrame">
-            <p>Число уникальных операндов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperands}}</b></p>
-            <p>Число уникальных операторов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperators}}</b></p>
-            <p>Общее число операндов в программе = <b class="txtOfMetric">{{retrievedObject.totalNumOfOperands}}</b></p>
-            <p>Общее число операторов в программе = <b class="txtOfMetric">{{retrievedObject.totalNumOfOperators}}</b></p>
-            <p>Словарь программы =
-              <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperands}}</b> +
-              <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperators}}</b> =
-              <b class="txtOfMetric">{{retrievedObject.dictionaryOfProgram}}</b>
-            </p>
-            <p>Длина программы =
-              <b class="txtOfMetric">{{retrievedObject.totalNumOfOperands}}</b> +
-              <b class="txtOfMetric">{{retrievedObject.totalNumOfOperators}}</b> =
-              <b class="txtOfMetric">{{retrievedObject.lenOfProgram}}</b>
-            </p>
-            <p>Объём программы =
-              <b class="txtOfMetric">{{retrievedObject.lenOfProgram}}</b> +
-              log2(<b class="txtOfMetric">{{retrievedObject.dictionaryOfProgram}}</b>) =
-              <b class="txtOfMetric">{{retrievedObject.volumeOfProgram}}</b>
-            </p>
+          <p>Число уникальных операндов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperands}}</b></p>
+          <p>Число уникальных операторов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperators}}</b></p>
+          <p>Общее число операндов в программе = <b class="txtOfMetric">{{retrievedObject.totalNumOfOperands}}</b></p>
+          <p>Общее число операторов в программе = <b class="txtOfMetric">{{retrievedObject.totalNumOfOperators}}</b></p>
+          <p>Словарь программы =
+            <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperands}}</b> +
+            <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperators}}</b> =
+            <b class="txtOfMetric">{{retrievedObject.dictionaryOfProgram}}</b>
+          </p>
+          <p>Длина программы =
+            <b class="txtOfMetric">{{retrievedObject.totalNumOfOperands}}</b> +
+            <b class="txtOfMetric">{{retrievedObject.totalNumOfOperators}}</b> =
+            <b class="txtOfMetric">{{retrievedObject.lenOfProgram}}</b>
+          </p>
+          <p>Объём программы =
+            <b class="txtOfMetric">{{retrievedObject.lenOfProgram}}</b> *
+            log2(<b class="txtOfMetric">{{retrievedObject.dictionaryOfProgram}}</b>) =
+            <b class="txtOfMetric">{{retrievedObject.volumeOfProgram}}</b>
+          </p>
         </div>
         <p class="resultOfTheMetric">Results of the Halstead metric</p>
         <button (click)="goBack()" id="btn" class="shine-button">Go back</button>
