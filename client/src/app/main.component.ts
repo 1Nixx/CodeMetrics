@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { IMetric } from "./metric";
+import { IHalsteadMetric } from "./HalsteadMetric";
 import { Router } from "@angular/router";
 
 @Component({
@@ -32,7 +32,7 @@ export class MainComponent {
   // Going to the page with the calculated Halstead metric
   constructor(private http: HttpClient, private router: Router){ }
   goCalculate(){
-    this.http.post<IMetric>("https://localhost:5001/api/Helstead", this.code.trim())
+    this.http.post<IHalsteadMetric>("https://localhost:5001/api/Halstead", this.code.trim())
       .subscribe((data) =>
       {localStorage.setItem('key', JSON.stringify(data)); this.router.navigate(['/metric'])})
   };

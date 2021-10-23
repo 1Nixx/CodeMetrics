@@ -1,6 +1,6 @@
 import { IOperandsAndOperators } from "./oper";
 
-export interface IMetric
+export interface IHalsteadMetric
 {
   listOfOperands: IOperandsAndOperators[];
   listOfOperators: IOperandsAndOperators[];
