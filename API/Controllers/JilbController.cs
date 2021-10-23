@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Metrics.Jilb;
+using Metrics.ReturnData;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace HelsteadMetricAPI.Controllers
@@ -11,5 +10,16 @@ namespace HelsteadMetricAPI.Controllers
 	[ApiController]
 	public class JilbController : ControllerBase
 	{
+
+		[HttpPost]
+		public async Task<ActionResult<JilbMetricReturn>> GetMetric()
+		{
+			using (var reader = new StreamReader(Request.Body))
+			{
+				string plainText = await reader.ReadToEndAsync();
+				var metricResult = new JilbMetric(plainText);
+				return Ok(await metricResult.CalculateMetricAsync());
+			}
+		}
 	}
 }

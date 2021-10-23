@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Lab1ConsoleProg;
+﻿using System.Collections.Generic;
 using Metrics.Helpers;
+using Metrics.Tokens;
 
-namespace Metrics.JilbMetric
+namespace Metrics.Jilb
 {
 	class Parcer
 	{
@@ -12,7 +10,9 @@ namespace Metrics.JilbMetric
 		private int _currentPos = 0;
 
 		public int AmountOfConditionalOp { get; private set; } = 0;
-		public int MaxNestingLevel { get; private set; } = 0;
+
+		private int _maxNestingLevel = 0;
+		public int MaxNestingLevel { get => _maxNestingLevel - 1; }
 
 		public Parcer(IEnumerable<Token> tokens)
 		{
@@ -72,26 +72,56 @@ namespace Metrics.JilbMetric
 				Token token = tokens[_currentPos];
 				if ((token.Value == "case") || (token.Value == "default"))
 				{
-					int nextBlockEnd = GetBlockEnd(_currentPos);
+					int nextBlockEnd = GetCaseBlockEnd(_currentPos, blockEnd);				
+					if (token.Value == "case")
+					{
+						AmountOfConditionalOp++;
+						nestingLevel++;
+					}
 					_currentPos++;
-					//Й!!!!!!!!!!!!!!!
+					ParceBlock(nextBlockEnd, nestingLevel);
 				}
 				else
 					_currentPos++;
 			}
 		}
 
+		private int GetCaseBlockEnd(int casePos, int switchEnd)
+		{
+			casePos++;
+			while ((tokens[casePos].Value != "case") && (tokens[casePos].Value != "default") && (casePos < switchEnd))
+			{
+				if (IsBracket(tokens[casePos]))
+				{
+					(_, int bracketEnd) = TokenHandler.GetPairBracket(tokens, casePos);
+					casePos = bracketEnd;
+				}
+				casePos++;
+			}
+			return casePos;
+		}
+
 		private	void UpdateNestingLevel(int currentNestingLevel)
 		{
-			if (currentNestingLevel > MaxNestingLevel)
+			if (currentNestingLevel > _maxNestingLevel)
 			{
-				MaxNestingLevel = currentNestingLevel;
+				_maxNestingLevel = currentNestingLevel;
 			}
 		}
 	
 		private	bool IsConditionalOp(Token token)
 		{
 			return " if else while do for switch ".Contains(" " + token.Value + " ");
+		}
+
+		private bool IsBracket(Token token)
+		{
+			return " { [ ( ".Contains(" " + token.Value + " ");
+		}
+
+		private bool IsOperatorWithBrackets(Token token)
+		{
+			return " switch while for foreach lock using sizeof typeof ".Contains(" " + token.Value + " ");
 		}
 
 		private int GetBlockEnd(int currentPos)
@@ -102,14 +132,41 @@ namespace Metrics.JilbMetric
 				(_, currentPos) = TokenHandler.GetPairBracket(tokens, currentPos);
 				currentPos++;
 			}
-			if (tokens[currentPos].Value == "if")
+			if (IsOperatorWithBrackets(tokens[currentPos]))
 			{
 				return GetBlockEnd(currentPos);
 			}
-			else
+			else if (tokens[currentPos].Value == "if")
+			{
+				return GetFullIfEnd(currentPos);
+			}
+			else if (tokens[currentPos].Value == "{")
 			{
 				return TokenHandler.GetPairBracket(tokens, currentPos).pos;
 			}
+			else
+			{
+				while (tokens[currentPos].Value != ";")
+				{
+					if (IsBracket(tokens[currentPos]))
+					{
+						(_, int bracketEnd) = TokenHandler.GetPairBracket(tokens, currentPos);
+						currentPos = bracketEnd;
+					}
+					currentPos++;
+				}
+				return currentPos;
+			}
+		}
+
+		private int GetFullIfEnd(int ifPos)
+		{
+			ifPos = GetBlockEnd(ifPos);
+			if (((ifPos + 1) < tokens.Count) && (tokens[ifPos + 1].Value == "else"))
+			{
+				return GetBlockEnd(ifPos + 1);
+			}
+			return ifPos;
 		}
 	}
 }

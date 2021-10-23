@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Metrics.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lab1ConsoleProg.ProgramAnalyzer
+namespace Metrics.ProgramAnalyzer
 {
 #warning Fix bug out of range exceprion in _currentPos++ and  etc.
 	public class Lexer

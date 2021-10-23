@@ -1,9 +1,7 @@
-﻿using Lab1ConsoleProg;
-using System;
+﻿using Metrics.Halstead;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Lab1ConsoleProg
+namespace Metrics.ReturnData
 {
 	public class HalsteadMetricReturn
 	{

@@ -1,10 +1,11 @@
-﻿using Lab1ConsoleProg.Enties;
+﻿using Halstead.Enties;
+using Metrics.ReturnData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lab1ConsoleProg
+namespace Metrics.Halstead
 {
 	public class HalsteadMetric
 	{

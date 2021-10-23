@@ -1,8 +1,5 @@
-﻿using Lab1ConsoleProg.Enties;
-using Metrics.JilbMetric;
-using Lab1ConsoleProg.ProgramAnalyzer;
-using System;
-using System.IO;
+﻿using System.IO;
+using Metrics.ProgramAnalyzer;
 
 namespace Lab1ConsoleProg
 {
@@ -16,7 +13,7 @@ namespace Lab1ConsoleProg
 			//var a = new Lexer("int __;");
 			//var items = a.TokenizeCode();
 			stream.Close();
-			new Metrics.JilbMetric.Parcer(a.TokenizeCode());
+			new Metrics.Jilb.Parcer(a.TokenizeCode());
 			/*foreach (var item in items)
 			{
 				Console.WriteLine("Type : {0, 10} Value : {1}", item.Type, item.Value);

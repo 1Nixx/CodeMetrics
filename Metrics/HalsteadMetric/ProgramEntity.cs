@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lab1ConsoleProg.Enties
+namespace Halstead.Enties
 {
 	public class ProgramEntity
 	{

@@ -1,4 +1,4 @@
-﻿namespace Lab1ConsoleProg
+﻿namespace Metrics.Tokens
 {
 	public enum TokenType
 	{

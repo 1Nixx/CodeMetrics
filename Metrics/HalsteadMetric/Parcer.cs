@@ -1,10 +1,11 @@
-﻿using Lab1ConsoleProg.Enties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Halstead.Enties;
 using Metrics.Helpers;
+using Metrics.Tokens;
 
-namespace Lab1ConsoleProg.ProgramAnalyzer
+namespace Halstead.ProgramAnalyzer
 {
 	public class Parcer
 	{
