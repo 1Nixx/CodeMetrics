@@ -1,11 +1,13 @@
-﻿using Lab1ConsoleProg.Enties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Halstead.Enties;
+using Metrics.Helpers;
+using Metrics.Tokens;
 
-namespace Lab1ConsoleProg.ProgramAnalyzer
+namespace Halstead.ProgramAnalyzer
 {
-	class Parcer
+	public class Parcer
 	{
 		private readonly List<Token> tokens;
 		private HashSet<int> _skipTokensInd = new HashSet<int>();
@@ -59,18 +61,22 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 				if ("{[(".Contains(tokens[_currentPos].Value))
 				{
 					int count = _currentPos++;
-					var bracket = GetPairBracket(count);
+					var bracket = TokenHandler.GetPairBracket(tokens, count);
 					_skipTokensInd.Add(bracket.pos);
 					return new ProgramEntity(ProgramType.Operator, tokens[count].Value + bracket.bracket);
 				}
-				else if (",;".Contains(tokens[_currentPos].Value))
+				else if (";".Contains(tokens[_currentPos].Value))
 				{
 					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
+				}/*
+				else if (tokens[_currentPos].Value == ",")
+				{
+					_currentPos++;
 				}
 				else
 				{
 					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
-				}
+				}*/
 			}
 			else if (tokens[_currentPos].Type == TokenType.Identifier)
 			{
@@ -88,40 +94,6 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			_currentPos++;
 			return null;
 		}
-
-		private (string bracket, int pos) GetPairBracket(int startInd)
-		{
-			Dictionary<string, string> bracketPairs = new Dictionary<string, string>()
-			{
-				{ "(", ")" },
-				{ "[", "]" },
-				{ "<", ">" },
-				{ "{", "}" }
-			};
-
-			int bracketAmount = 1;
-			int indexNow = startInd+1;
-
-			while (indexNow < tokens.Count && bracketAmount != 0)
-			{
-				if (tokens[indexNow].Value == tokens[startInd].Value)
-				{
-					bracketAmount++;
-				}
-				else if (tokens[indexNow].Value == bracketPairs[tokens[startInd].Value])
-				{
-					bracketAmount--;
-				}
-				indexNow++;
-			}
-			if (indexNow > tokens.Count)
-			{
-				throw new Exception();
-			}
-			indexNow--;
-
-			return (bracketPairs[tokens[startInd].Value], indexNow);
-		}
 	
 		private (string entity, ProgramType entityType) GetIdentifier()
 		{
@@ -129,7 +101,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			{
 				try
 				{
-					var nearestBracket = GetPairBracket(_currentPos + 1);
+					var nearestBracket = TokenHandler.GetPairBracket(tokens, _currentPos + 1);
 					var potentialGeneric = tokens.GetRange(_currentPos + 2, nearestBracket.pos - _currentPos - 2);
 					if (IsGeneric(potentialGeneric))
 					{
@@ -138,7 +110,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 						_currentPos += 2;
 						if (tokens[nearestBracket.pos + 1].Value == "(")
 						{
-							var bracket = GetPairBracket(nearestBracket.pos + 1);
+							var bracket = TokenHandler.GetPairBracket(tokens, nearestBracket.pos + 1);
 							_skipTokensInd.Add(nearestBracket.pos + 1);
 							_skipTokensInd.Add(bracket.pos);
 							
@@ -157,7 +129,7 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			}
 			else if (tokens[_currentPos + 1].Value == "(")
 			{
-				var bracket = GetPairBracket(_currentPos + 1);
+				var bracket = TokenHandler.GetPairBracket(tokens, _currentPos + 1);
 				_skipTokensInd.Add(bracket.pos);
 				int pos = _currentPos;
 				_currentPos += 2;
@@ -200,9 +172,13 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			}
 			else if (" switch while for foreach lock using sizeof typeof ".Contains(" " + tokens[_currentPos].Value + " "))
 			{
-				var bracket = GetPairBracket(_currentPos++ + 1);
+				var bracket = TokenHandler.GetPairBracket(tokens, _currentPos++ + 1);
 				_skipTokensInd.Add(bracket.pos);
 				return tokens[_currentPos++ - 1].Value + "()";
+			}
+			else if (" byte sbyte short ushort int uint long ulong float double decimal char bool object string void ".Contains(" " + tokens[_currentPos].Value + " "))
+			{
+				return null;
 			}
 			else
 			{
@@ -212,9 +188,9 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private string HandlerDo()
 		{
-			var bracket = GetPairBracket(_currentPos + 1);
+			var bracket = TokenHandler.GetPairBracket(tokens, _currentPos + 1);
 			int whilePos = bracket.pos + 1;
-			bracket = GetPairBracket(whilePos + 1);
+			bracket = TokenHandler.GetPairBracket(tokens, whilePos + 1);
 			_skipTokensInd.Add(whilePos);
 			_skipTokensInd.Add(whilePos + 1);
 			_skipTokensInd.Add(bracket.pos);
@@ -227,17 +203,19 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.Append("try");
 
-			var bracket = GetPairBracket(_currentPos + 1);
+			var bracket = TokenHandler.GetPairBracket(tokens, _currentPos + 1);
+			_currentPos++;
 			if (tokens[bracket.pos + 1].Value == "catch")
 			{
 				var catchBrackets = bracket;
 				while (tokens[catchBrackets.pos + 1].Value == "catch")
 				{
 					int bracketPos;
+					_skipTokensInd.Add(catchBrackets.pos + 1);
 					if (tokens[catchBrackets.pos + 2].Value == "(")
 					{
 						stringBuilder.Append("..catch()");
-						catchBrackets = GetPairBracket(catchBrackets.pos + 2);
+						catchBrackets = TokenHandler.GetPairBracket(tokens, catchBrackets.pos + 2);
 						_skipTokensInd.Add(catchBrackets.pos);
 						bracketPos = catchBrackets.pos + 1;
 					}
@@ -246,10 +224,11 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 						stringBuilder.Append("..catch");
 						bracketPos = catchBrackets.pos + 2;
 					}
-					catchBrackets = GetPairBracket(bracketPos);
+					catchBrackets = TokenHandler.GetPairBracket(tokens, bracketPos);
 				}
 				if (tokens[bracket.pos + 1].Value == "finaly")
 				{
+					_skipTokensInd.Add(bracket.pos + 1);
 					stringBuilder.Append("..finaly");
 				}
 				return stringBuilder.ToString();
@@ -262,12 +241,12 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private string HandlerIf()
 		{
-			var condBracket = GetPairBracket(_currentPos + 1);
+			var condBracket = TokenHandler.GetPairBracket(tokens, _currentPos + 1);
 			_currentPos += 2;
 			_skipTokensInd.Add(condBracket.pos);
 			if (tokens[condBracket.pos + 1].Value == "{")
 			{				
-				var endThenBranch = GetPairBracket(condBracket.pos + 1);
+				var endThenBranch = TokenHandler.GetPairBracket(tokens, condBracket.pos + 1);
 				if (endThenBranch.pos + 1 < tokens.Count && tokens[endThenBranch.pos + 1].Value == "else")
 				{
 					_skipTokensInd.Add(endThenBranch.pos + 1);
@@ -314,9 +293,24 @@ namespace Lab1ConsoleProg.ProgramAnalyzer
 
 		private bool IsGeneric(List<Token> tokenList)
 		{
-
-
-			return false;
+			int counter = 0;
+			bool isGeneric = true;
+			while (counter < tokenList.Count && isGeneric)
+			{
+				if (tokenList[counter].Type == TokenType.Identifier || tokenList[counter].Type == TokenType.Keyword)
+				{ 
+					counter++;
+					if (counter < tokenList.Count && tokenList[counter].Value == ",")
+					{
+						counter++;
+					}
+				}
+				else
+				{
+					isGeneric = false;
+				}
+			}
+			return isGeneric;
 		}
 	}
 }

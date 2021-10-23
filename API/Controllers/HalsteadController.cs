@@ -1,20 +1,18 @@
-﻿using Lab1ConsoleProg;
-using Lab1ConsoleProg.ProgramAnalyzer;
-using Microsoft.AspNetCore.Http;
+﻿using Halstead.ProgramAnalyzer;
+using Metrics.Halstead;
+using Metrics.ProgramAnalyzer;
+using Metrics.ReturnData;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace HelsteadMetricAPI.Controllers
+namespace API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class HelsteadController : ControllerBase
+	public class HalsteadController : ControllerBase
 	{
-		public HelsteadController()
+		public HalsteadController()
 		{
 		}
 

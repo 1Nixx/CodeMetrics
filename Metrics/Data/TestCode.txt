@@ -1,4 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LabaLongArithm
 {
@@ -6,7 +12,7 @@ namespace LabaLongArithm
 	{
 		public static int IsItPalyndrome(string a)
 		{
-			int Check = 0;
+			var Check = 0;
 			for (int i = 0; i <= a.Length - 1; i++)
 			{
 				if (a[i] == a[a.Length - 1 - i])
@@ -20,7 +26,7 @@ namespace LabaLongArithm
 
 		public static int IsItPalyndrome(int[] arr)
 		{
-			int Check = 0;
+			var Check = 0;
 			for (int i = 0; i <= arr.Length - 1; i++)
 			{
 				if (arr[i] == arr[arr.Length - 1 - i])
@@ -54,7 +60,7 @@ namespace LabaLongArithm
 
 		public static int[] DeleteZero(int[] arr)
 		{
-			int i = 0;
+			var i = 0;
 			if (arr[0] == 0)
 			{
 				i = 1;

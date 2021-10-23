@@ -1,4 +1,4 @@
-﻿namespace Lab1ConsoleProg.Enties
+﻿namespace Halstead.Enties
 {
 	public enum ProgramType
 	{

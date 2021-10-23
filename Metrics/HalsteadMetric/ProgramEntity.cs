@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lab1ConsoleProg
+namespace Halstead.Enties
 {
-	public class Token
+	public class ProgramEntity
 	{
-		public TokenType Type { get; private set; }
+		public ProgramType Type { get; private set; }
 		public string Value { get; private set; }
 
-		public Token(TokenType type, string value)
+		public ProgramEntity(ProgramType type, string value)
 		{
 			this.Type = type;
 			this.Value = value;
