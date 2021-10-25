@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Halstead.Enties;
+﻿using Halstead.Enties;
 using Metrics.Helpers;
 using Metrics.Tokens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Halstead.ProgramAnalyzer
+namespace Metrics.Halstead
 {
-	public class Parcer
+	class ParserSimplified : IParcer
 	{
 		private readonly List<Token> tokens;
 		private HashSet<int> _skipTokensInd = new HashSet<int>();
 
 		private int _currentPos = 0;
 
-		public Parcer(IEnumerable<Token> tokens)
+		public ParserSimplified(IEnumerable<Token> tokens)
 		{
 			this.tokens = (List<Token>)tokens;
 		}
@@ -28,7 +28,7 @@ namespace Halstead.ProgramAnalyzer
 				if (entity != null)
 				{
 					entityList.Add(entity);
-				}			
+				}
 			}
 			return entityList;
 		}
@@ -41,7 +41,7 @@ namespace Halstead.ProgramAnalyzer
 				_currentPos++;
 				return null;
 			}
-				
+
 			if (tokens[_currentPos].Type == TokenType.BoolLiteral ||
 				tokens[_currentPos].Type == TokenType.NumberLiteral ||
 				tokens[_currentPos].Type == TokenType.NullLiteral ||
@@ -58,25 +58,13 @@ namespace Halstead.ProgramAnalyzer
 			}
 			else if (tokens[_currentPos].Type == TokenType.Punctuator)
 			{
-				if ("{[(".Contains(tokens[_currentPos].Value))
+				if ("[(".Contains(tokens[_currentPos].Value))
 				{
 					int count = _currentPos++;
 					var bracket = TokenHandler.GetPairBracket(tokens, count);
 					_skipTokensInd.Add(bracket.pos);
 					return new ProgramEntity(ProgramType.Operator, tokens[count].Value + bracket.bracket);
 				}
-				else if (";".Contains(tokens[_currentPos].Value))
-				{
-					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
-				}/*
-				else if (tokens[_currentPos].Value == ",")
-				{
-					_currentPos++;
-				}
-				else
-				{
-					return new ProgramEntity(ProgramType.Operator, tokens[_currentPos++].Value);
-				}*/
 			}
 			else if (tokens[_currentPos].Type == TokenType.Identifier)
 			{
@@ -89,12 +77,12 @@ namespace Halstead.ProgramAnalyzer
 				if (entity != null)
 				{
 					return new ProgramEntity(ProgramType.Operator, entity);
-				}				
+				}
 			}
 			_currentPos++;
 			return null;
 		}
-	
+
 		private (string entity, ProgramType entityType) GetIdentifier()
 		{
 			if (tokens[_currentPos + 1].Value == "<")
@@ -113,7 +101,7 @@ namespace Halstead.ProgramAnalyzer
 							var bracket = TokenHandler.GetPairBracket(tokens, nearestBracket.pos + 1);
 							_skipTokensInd.Add(nearestBracket.pos + 1);
 							_skipTokensInd.Add(bracket.pos);
-							
+
 							return (tokens[pos].Value + "<>" + "()", ProgramType.Operator);
 						}
 						else
@@ -121,7 +109,7 @@ namespace Halstead.ProgramAnalyzer
 							return (tokens[pos].Value + "<>", ProgramType.Operand);
 						}
 					}
-				}	
+				}
 				catch (Exception)
 				{
 					return (tokens[_currentPos++].Value, ProgramType.Operand);
@@ -140,7 +128,7 @@ namespace Halstead.ProgramAnalyzer
 
 		private string GetKeyword()
 		{
-			if (tokens[_currentPos].Value == "using" && tokens[_currentPos+1].Value != "(")
+			if (tokens[_currentPos].Value == "using" && tokens[_currentPos + 1].Value != "(")
 			{
 				SkipToSemicolons();
 				return null;
@@ -176,14 +164,16 @@ namespace Halstead.ProgramAnalyzer
 				_skipTokensInd.Add(bracket.pos);
 				return tokens[_currentPos++ - 1].Value + "()";
 			}
-			else if (" byte sbyte short ushort int uint long ulong float double decimal char bool object string void ".Contains(" " + tokens[_currentPos].Value + " "))
+			else
+				return null;
+			/*else if (" byte sbyte short ushort int uint long ulong float double decimal char bool object string void ".Contains(" " + tokens[_currentPos].Value + " "))
 			{
 				return null;
 			}
-			else
+			else 
 			{
 				return tokens[_currentPos++].Value;
-			}
+			}*/
 		}
 
 		private string HandlerDo()
@@ -245,12 +235,12 @@ namespace Halstead.ProgramAnalyzer
 			_currentPos += 2;
 			_skipTokensInd.Add(condBracket.pos);
 			if (tokens[condBracket.pos + 1].Value == "{")
-			{				
+			{
 				var endThenBranch = TokenHandler.GetPairBracket(tokens, condBracket.pos + 1);
 				if (endThenBranch.pos + 1 < tokens.Count && tokens[endThenBranch.pos + 1].Value == "else")
 				{
 					_skipTokensInd.Add(endThenBranch.pos + 1);
-					return "if()..else"; 
+					return "if()..else";
 				}
 				else
 				{
@@ -287,7 +277,7 @@ namespace Halstead.ProgramAnalyzer
 
 		private void SkipToSemicolons()
 		{
-			while (tokens[_currentPos++].Value != ";");
+			while (tokens[_currentPos++].Value != ";") ;
 			_currentPos--;
 		}
 
@@ -298,7 +288,7 @@ namespace Halstead.ProgramAnalyzer
 			while (counter < tokenList.Count && isGeneric)
 			{
 				if (tokenList[counter].Type == TokenType.Identifier || tokenList[counter].Type == TokenType.Keyword)
-				{ 
+				{
 					counter++;
 					if (counter < tokenList.Count && tokenList[counter].Value == ",")
 					{

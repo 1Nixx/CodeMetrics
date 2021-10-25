@@ -111,7 +111,7 @@ namespace Metrics.Jilb
 	
 		private	bool IsConditionalOp(Token token)
 		{
-			return " if else while do for switch ".Contains(" " + token.Value + " ");
+			return " if else while do for switch foreach ".Contains(" " + token.Value + " ");
 		}
 
 		private bool IsBracket(Token token)

@@ -2,9 +2,12 @@
 using Metrics.Halstead;
 using Metrics.ProgramAnalyzer;
 using Metrics.ReturnData;
+using Metrics.Tokens;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using HalstedMetricParcer = Halstead.ProgramAnalyzer;
 
 namespace API.Controllers
 {
@@ -22,9 +25,9 @@ namespace API.Controllers
 			using (var reader = new StreamReader(Request.Body))
 			{
 				string plainText = await reader.ReadToEndAsync();
-				var a = new Lexer(plainText);
-				var items = new Parcer(a.TokenizeCode()).Parce();
-				HalsteadMetric metric = new HalsteadMetric(items);
+				var tokens = (new Lexer(plainText)).TokenizeCode();
+				var operatorsParcer = new HalstedMetricParcer.Parcer(new ParcerHalstead(tokens)).parcedCode;
+				HalsteadMetric metric = new HalsteadMetric(operatorsParcer);
 				return Ok(metric.CreateListsOfOperandsAndOperators());
 			}			
 		}

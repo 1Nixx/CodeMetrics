@@ -22,8 +22,8 @@ namespace Metrics.Jilb
 		{
 			var result = new JilbMetricReturn();
 
-			var operatorsParcer = new HalstedMetricParcer.Parcer(tokens);
-			var halsteadResult = (new HalsteadMetric(operatorsParcer.Parce())).CreateListsOfOperandsAndOperators();
+			var operatorsParcer = (new HalstedMetricParcer.Parcer(new ParserSimplified(tokens))).parcedCode;
+			var halsteadResult = (new HalsteadMetric(operatorsParcer)).CreateListsOfOperandsAndOperators();
 
 			var jilbParcer = new Parcer(tokens);
 
