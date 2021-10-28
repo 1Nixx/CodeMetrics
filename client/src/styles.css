@@ -22,12 +22,23 @@ body {
     margin: 10px 20px;
     position: absolute;
     top: 70%;
+    width: 247px;
     overflow: hidden;
     border: 2px solid #fe6637;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
     color: #fe6637;
     transition: .2s ease-in-out;
+  }
+
+  #btn1 {
+    position: absolute;
+    top: 76%;
+  }
+
+  #btn2 {
+    position: absolute;
+    top: 82%;
   }
 
   .shine-button:before {
@@ -107,6 +118,7 @@ body {
 
   #btn {
     position: absolute;
+    width: 150px;
     top: 2%;
     left: 90%;
   }
@@ -265,7 +277,7 @@ body {
     font-weight: bold;
   }
 
-  .metricFrame {
+  .metricFrameHalsted {
     position: absolute;
     font-size: 25px;
     padding: 28px;
@@ -273,6 +285,17 @@ body {
     border-radius: 4px;
     border: 3px solid orange;
     top: 580px;
+    text-shadow: 0 1px 0 #2b2929;
+  }
+
+  .metricFrameJilb {
+    position: absolute;
+    font-size: 25px;
+    padding: 28px;
+    text-align: left;
+    top: 40%;
+    border-radius: 4px;
+    border: 3px solid orange;
     text-shadow: 0 1px 0 #2b2929;
   }
 

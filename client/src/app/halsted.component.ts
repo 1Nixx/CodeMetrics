@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'about-app',
+  selector: 'halsted-app',
   template: `
       <div class="box">
         <i class="nameOfTheTable1">Operators</i>
@@ -51,7 +51,7 @@ import { Router } from "@angular/router";
             </tfoot>
           </table>
         </div>
-        <div class="metricFrame">
+        <div class="metricFrameHalsted">
           <p>Число уникальных операндов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperands}}</b></p>
           <p>Число уникальных операторов программы = <b class="txtOfMetric">{{retrievedObject.numOfUniqueOperators}}</b></p>
           <p>Общее число операндов в программе = <b class="txtOfMetric">{{retrievedObject.totalNumOfOperands}}</b></p>
@@ -78,7 +78,7 @@ import { Router } from "@angular/router";
     `
 })
 
-export class AboutComponent {
+export class HalstedComponent {
   retrievedObject = JSON.parse(<string>localStorage.getItem('key'));
 
   // Returning to the page with the input of the code for calculating the Halstead metric
