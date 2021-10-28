@@ -8,8 +8,8 @@ import { Router } from "@angular/router";
   template: `
       <div class="box" >
         <p class="nameOfTheMetric">Halstead metric</p>
-        <textarea class="input_text" type="text" (keydown)="doTabulation($event)" [(ngModel)]="code"></textarea>
-        <button (click)="goCalculate()" class="shine-button">Calculate the metric</button>
+        <textarea class="input_text" type="text" (keydown)="doTabulation($event)" [(ngModel)]="code" (load)="handleLoad($event)"></textarea>
+        <button (click)="goCalculate()" class="shine-button">Calculate the Halstead metric</button>
         <p class="authors">Created by Nikita Hripach & Pavel Starovoytov</p>
       </div>
   `
@@ -17,6 +17,13 @@ import { Router } from "@angular/router";
 
 export class MainComponent {
   code: string = "";
+
+  handleLoad(event:any){
+    if (localStorage.getItem(event) === null) {
+      return "";
+    }
+    return localStorage.getItem(event);
+  }
 
   // Give possibility of tabulation
   doTabulation(event:any) {
@@ -32,10 +39,10 @@ export class MainComponent {
   // Going to the page with the calculated Halstead metric
   constructor(private http: HttpClient, private router: Router){ }
   goCalculate(){
+    localStorage.setItem('save', this.code);
     this.http.post<IHalsteadMetric>("https://localhost:5001/api/Halstead", this.code.trim())
       .subscribe((data) =>
       {localStorage.setItem('key', JSON.stringify(data)); this.router.navigate(['/metric'])})
   };
 
 }
-
