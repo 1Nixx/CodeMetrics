@@ -14,10 +14,7 @@ namespace API.Controllers
 	[Route("api/[controller]")]
 	[ApiController]
 	public class HalsteadController : ControllerBase
-	{
-		public HalsteadController()
-		{
-		}
+	{ 
 
 		[HttpPost]
 		public async Task<ActionResult<HalsteadMetricReturn>> GetMetric()
