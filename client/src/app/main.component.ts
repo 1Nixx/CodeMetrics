@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { IMetric } from "./metric";
+import { IHalsteadMetric } from "./HalsteadMetric";
 import { Router } from "@angular/router";
+import {IJilbMetric} from "./JilbMetric";
 
 @Component({
   selector: 'home-app',
@@ -9,14 +10,20 @@ import { Router } from "@angular/router";
       <div class="box" >
         <p class="nameOfTheMetric">Halstead metric</p>
         <textarea class="input_text" type="text" (keydown)="doTabulation($event)" [(ngModel)]="code"></textarea>
-        <button (click)="goCalculate()" class="shine-button">Calculate the metric</button>
+        <button (click)="goCalculateHalstead()" class="shine-button">Calculate the Halstead metric</button>
+        <button id="btn1" (click)="goCalculateJilb()" class="shine-button">Calculate the Jilb metric</button>
+        <button id="btn2" (click)="goClear()" class="shine-button">Clear the field</button>
         <p class="authors">Created by Nikita Hripach & Pavel Starovoytov</p>
       </div>
   `
 })
 
 export class MainComponent {
-  code: string = "";
+  code: string | null = sessionStorage.getItem('save');
+
+  goClear() {
+    this.code = "";
+  }
 
   // Give possibility of tabulation
   doTabulation(event:any) {
@@ -31,11 +38,24 @@ export class MainComponent {
 
   // Going to the page with the calculated Halstead metric
   constructor(private http: HttpClient, private router: Router){ }
-  goCalculate(){
-    this.http.post<IMetric>("https://localhost:5001/api/Helstead", this.code.trim())
+  goCalculateHalstead(){
+    if (typeof this.code === "string") {
+      sessionStorage.setItem('save', this.code);
+    }
+    // @ts-ignore
+    this.http.post<IHalsteadMetric>("https://localhost:5001/api/Halstead", this.code.trim())
       .subscribe((data) =>
-      {localStorage.setItem('key', JSON.stringify(data)); this.router.navigate(['/metric'])})
+      {localStorage.setItem('key', JSON.stringify(data)); this.router.navigate(['/halsted'])})
   };
 
-}
+  goCalculateJilb() {
+    if (typeof this.code === "string") {
+      sessionStorage.setItem('save', this.code);
+    }
+    // @ts-ignore
+    this.http.post<IJilbMetric>("https://localhost:5001/api/Jilb", this.code.trim())
+      .subscribe((data) =>
+      {localStorage.setItem('key', JSON.stringify(data)); console.log(data); this.router.navigate(['/jilb'])})
+  }
 
+}

@@ -6,18 +6,20 @@ import {Routes, RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MainComponent }   from './main.component';
-import { AboutComponent }   from './about.component';
 import { FormsModule } from "@angular/forms";
+import { HalstedComponent } from "./halsted.component";
+import {JilbComponent} from "./jilb.component";
 
 // Defining routes
 const appRoutes: Routes =[
   { path: '', component: MainComponent},
-  { path: 'metric', component: AboutComponent}
+  { path: 'halsted', component: HalstedComponent},
+  { path: 'jilb', component: JilbComponent }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, MainComponent, AboutComponent
+    AppComponent, MainComponent, HalstedComponent, JilbComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, RouterModule.forRoot(appRoutes), FormsModule
