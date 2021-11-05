@@ -8,7 +8,7 @@ import {IJilbMetric} from "./JilbMetric";
   selector: 'home-app',
   template: `
       <div class="box" >
-        <p class="nameOfTheMetric">Halstead metric</p>
+        <p class="nameOfTheMetric">Metrics</p>
         <textarea class="input_text" type="text" (keydown)="doTabulation($event)" [(ngModel)]="code"></textarea>
         <button (click)="goCalculateHalstead()" class="shine-button">Calculate the Halstead metric</button>
         <button id="btn1" (click)="goCalculateJilb()" class="shine-button">Calculate the Jilb metric</button>
