@@ -48,6 +48,7 @@ export class MainComponent {
       {localStorage.setItem('key', JSON.stringify(data)); this.router.navigate(['/halsted'])})
   };
 
+  // Going to the page with the calculated Jilb metric
   goCalculateJilb() {
     if (typeof this.code === "string") {
       sessionStorage.setItem('save', this.code);
