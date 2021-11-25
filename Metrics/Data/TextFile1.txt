@@ -1,14 +1,46 @@
-﻿if ()
+﻿public static int[] FillArray(int TestV)
 {
-}
-else if ()
-{
-	cb();
-}
-else if {
-
-}
-else
-{
-	
+    int TestI = 0, TestJ = 0, TestCount = 0, TestError = 0;
+    int[] arr = { 5,20,31,44,24,29,39,56,96,54,13 };
+    for (TestI = 0; TestI <= 10; TestI++)
+    {
+		for (TestJ = 0; TestJ <= 10; TestJ++)
+		{
+	    	for (TestV = 0; TestV <= 10; TestV++)
+	    	{
+				if (arr[TestV] < 10)
+		   			do
+		    			{
+						arr[TestV]++;
+		    				TestCount++;
+		    			if (TestCount == 10)
+		    			{
+		           			TestError = 1;
+		    			} else if (TestCount == 7)
+						{
+			    			TestError = 2;
+						} else 
+						{
+			    			TestError = 0;
+						}
+		    		} while (arr[TestV] != 10);
+				else
+				{
+		    			switch (arr[TestV])
+		    			{
+		        		case 10:
+			    			arr[TestV] = 0;
+			   				break;
+		        		case 11:
+		        		case 12:
+			   			arr[TestV] = 10;
+			    			break;
+		    			}
+	       		}
+	    	}
+		}
+    }
+    if (TestError == 1)
+		for (TestV = 0; TestV <= 10; TestV++)
+	    	arr[TestV] = 0;
 }

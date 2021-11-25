@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
+using Metrics.ChapinMetric;
 using Metrics.ProgramAnalyzer;
 
 namespace Lab1ConsoleProg
@@ -8,12 +10,15 @@ namespace Lab1ConsoleProg
 
 		static void Main(string[] args)
 		{
-			StreamReader stream = new StreamReader(@"..\..\..\Data\TextFile1.txt");
+			StreamReader stream = new StreamReader(@"..\..\..\Data\TestCode.txt");
 			var a = new Lexer(stream.ReadToEnd());
 			//var a = new Lexer("int __;");
-			//var items = a.TokenizeCode();
+			var items = a.TokenizeCode();
 			stream.Close();
-			new Metrics.Jilb.Parcer(a.TokenizeCode());
+			var b = new ChapinMetric(items);
+			var c = b.CalculateChapinMetric();
+			//new Metrics.Jilb.Parcer(a.TokenizeCode());
+
 			/*foreach (var item in items)
 			{
 				Console.WriteLine("Type : {0, 10} Value : {1}", item.Type, item.Value);
