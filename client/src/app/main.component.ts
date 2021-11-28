@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { IHalsteadMetric } from "./HalsteadMetric";
 import { Router } from "@angular/router";
-import {IJilbMetric} from "./JilbMetric";
+import { IJilbMetric } from "./JilbMetric";
+import { IChapinMetric } from "./ChapinMetric";
+import { ISpenMetric } from "./SpenMetric";
 
 @Component({
   selector: 'home-app',
@@ -12,7 +14,8 @@ import {IJilbMetric} from "./JilbMetric";
         <textarea class="input_text" type="text" (keydown)="doTabulation($event)" [(ngModel)]="code"></textarea>
         <button (click)="goCalculateHalstead()" class="shine-button">Calculate the Halstead metric</button>
         <button id="btn1" (click)="goCalculateJilb()" class="shine-button">Calculate the Jilb metric</button>
-        <button id="btn2" (click)="goClear()" class="shine-button">Clear the field</button>
+        <button id="btn2" (click)="goCalculateChapinAndSpen()" class="shine-button">Calculate the Chapin and Spen metrics</button>
+        <button id="btn3" (click)="goClear()" class="shine-button">Clear the field</button>
         <p class="authors">Created by Nikita Hripach & Pavel Starovoytov</p>
       </div>
   `
@@ -57,6 +60,21 @@ export class MainComponent {
     this.http.post<IJilbMetric>("https://localhost:5001/api/Jilb", this.code.trim())
       .subscribe((data) =>
       {localStorage.setItem('key', JSON.stringify(data)); console.log(data); this.router.navigate(['/jilb'])})
+  }
+
+  // Going to the page with the calculated Chapin and Spen metrics
+  goCalculateChapinAndSpen() {
+    if (typeof this.code === "string") {
+      sessionStorage.setItem('save', this.code);
+    }
+    // @ts-ignore
+    this.http.post<IChapinMetric>("https://localhost:5001/api/Chapin", this.code.trim())
+      .subscribe((data) =>
+      {localStorage.setItem('key1', JSON.stringify(data)); console.log(data);})
+    // @ts-ignore
+    this.http.post<ISpenMetric>("https://localhost:5001/api/Spen", this.code.trim())
+      .subscribe((data) =>
+      {localStorage.setItem('key2', JSON.stringify(data)); console.log(data); this.router.navigate(['/chapinAndSpen'])})
   }
 
 }
