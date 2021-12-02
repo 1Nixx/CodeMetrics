@@ -67,8 +67,8 @@ namespace Metrics.ChapinMetric
 				result.ChapinIOTypes.Add(resultIOItem.Key.ToString(), resultIOItem.Value);
 				result.VariableIOCount.Add(resultIOItem.Key.ToString(), resultIOItem.Value.Count);
 			}
-			result.MetricResult = result.VariableCount.Sum(x => x.Value);
-			result.MetricIOResult = result.VariableIOCount.Sum(x => x.Value);
+			result.MetricResult = 1 * result.VariableCount["P"] + 2 * result.VariableCount["M"] + 3 * result.VariableCount["C"] + 0.5 * result.VariableCount["T"];
+			result.MetricIOResult = 1 * result.VariableIOCount["P"] + 2 * result.VariableIOCount["M"] + 3 * result.VariableIOCount["C"] + 0.5 * result.VariableIOCount["T"];
 
 			return result;
 		}

@@ -31,7 +31,7 @@ namespace Metrics.SpenMetric
 
 			var result = from ident in identificators
 						 group ident.Value by ident.Value into g
-						 select new { g.Key, Count = g.Count() };
+						 select new { g.Key, Count = g.Count() - 1};
 
 			return new SpenMetricReturn() { SpenSet = result.ToDictionary(i => i.Key, e => e.Count), CommonResult = result.Sum(x => x.Count) };
 		}
