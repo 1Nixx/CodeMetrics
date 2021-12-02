@@ -6,8 +6,11 @@ namespace Metrics.ChapinMetric
 {
 	public class ChapinMetricReturn
 	{
-		public Dictionary<string, List<string>> chapinTypes { get; set; }
-
-		public Dictionary<string, List<string>> chapinIOTypes { get; set; }
+		public Dictionary<string, List<string>> ChapinTypes { get; set; }
+		public Dictionary<string, int> VariableCount { get; set; }
+		public Dictionary<string, List<string>> ChapinIOTypes { get; set; }
+		public Dictionary<string, int> VariableIOCount { get; set; }
+		public int MetricResult { get; set; }
+		public int MetricIOResult { get; set; }
 	}
 }

@@ -52,13 +52,23 @@ namespace Metrics.ChapinMetric
 			}
 
 			var result = new ChapinMetricReturn();
-			result.chapinIOTypes = new Dictionary<string, List<string>>();
-			result.chapinTypes = new Dictionary<string, List<string>>();
-
+			result.ChapinIOTypes = new Dictionary<string, List<string>>();
+			result.ChapinTypes = new Dictionary<string, List<string>>();
+			result.VariableCount = new Dictionary<string, int>();
+			result.VariableIOCount = new Dictionary<string, int>();
+			
 			foreach (var resultItem in resultMetric)
-				result.chapinTypes.Add(resultItem.Key.ToString(), resultItem.Value);
+			{
+				result.ChapinTypes.Add(resultItem.Key.ToString(), resultItem.Value);
+				result.VariableCount.Add(resultItem.Key.ToString(), resultItem.Value.Count);
+			}
 			foreach (var resultIOItem in chapinIOMetric)
-				result.chapinIOTypes.Add(resultIOItem.Key.ToString(), resultIOItem.Value);
+			{
+				result.ChapinIOTypes.Add(resultIOItem.Key.ToString(), resultIOItem.Value);
+				result.VariableIOCount.Add(resultIOItem.Key.ToString(), resultIOItem.Value.Count);
+			}
+			result.MetricResult = result.VariableCount.Sum(x => x.Value);
+			result.MetricIOResult = result.VariableIOCount.Sum(x => x.Value);
 
 			return result;
 		}

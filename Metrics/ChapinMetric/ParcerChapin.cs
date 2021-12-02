@@ -59,7 +59,7 @@ namespace Metrics.ChapinMetric
 				VariableType type = VariableType.Expression;
 				if (!IsMethod(tokens, _currentPos))
 				{
-					if (tokens[_currentPos].Value != "Console")
+					if (tokens[_currentPos].Value != "Console" && !IsField(tokens, _currentPos))
 					{
 						if (IsTypeKeyword(tokens[_currentPos - 1]))
 						{
@@ -104,13 +104,20 @@ namespace Metrics.ChapinMetric
 			return null;
 		}
 
+		private bool IsField(List<Token> tokens, int currentPos)
+		{
+			if (tokens[currentPos - 1].Value == ".")
+				return true;
+			return false;
+		}
+
 		private List<Variable> GetAllMethodVariable(List<Token> tokens,ref int currentPos, VariableType type)
 		{
 			var result = new List<Variable>();
 			int methodEnd = TokenHandler.GetPairBracket(tokens, ++currentPos).pos;
 			for (; currentPos < methodEnd; currentPos++)
 			{
-				if ((tokens[currentPos].Type == TokenType.Identifier) && !IsMethod(tokens, currentPos))
+				if ((tokens[currentPos].Type == TokenType.Identifier) && !IsMethod(tokens, currentPos) && !IsField(tokens, currentPos))
 					result.Add(new Variable(type, tokens[currentPos].Value));
 			}
 			return result;

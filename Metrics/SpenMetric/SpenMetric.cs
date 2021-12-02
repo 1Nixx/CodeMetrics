@@ -33,7 +33,7 @@ namespace Metrics.SpenMetric
 						 group ident.Value by ident.Value into g
 						 select new { g.Key, Count = g.Count() };
 
-			return new SpenMetricReturn() { spenSet = result.ToDictionary(i => i.Key, e => e.Count) };
+			return new SpenMetricReturn() { SpenSet = result.ToDictionary(i => i.Key, e => e.Count), CommonResult = result.Sum(x => x.Count) };
 		}
 	}
 }
