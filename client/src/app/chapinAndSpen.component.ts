@@ -40,10 +40,25 @@ import {IChapinMetric} from "./ChapinMetric";
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of retrievedObject1.chapinTypes | keyvalue">
-            <td>{{item.key}}</td>
-            <td>{{item.value}}</td>
-            <td>{{item.value.length}}</td>
+          <tr>
+            <td>P</td>
+            <td>{{retrievedObject1.chapinTypes.P}}</td>
+            <td>{{retrievedObject1.chapinTypes.P.length}}</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>{{retrievedObject1.chapinTypes.M}}</td>
+            <td>{{retrievedObject1.chapinTypes.M.length}}</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>{{retrievedObject1.chapinTypes.C}}</td>
+            <td>{{retrievedObject1.chapinTypes.C.length}}</td>
+          </tr>
+          <tr>
+            <td>T</td>
+            <td>{{retrievedObject1.chapinTypes.T}}</td>
+            <td>{{retrievedObject1.chapinTypes.T.length}}</td>
           </tr>
           <th>Chepin's metric</th>
           <th>Q = 1*{{retrievedObject1.chapinTypes.P.length}} + 2*{{retrievedObject1.chapinTypes.M.length}}
@@ -64,10 +79,25 @@ import {IChapinMetric} from "./ChapinMetric";
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of retrievedObject1.chapinIOTypes | keyvalue">
-            <td>{{item.key}}</td>
-            <td>{{item.value}}</td>
-            <td>{{item.value.length}}</td>
+          <tr>
+            <td>P</td>
+            <td>{{retrievedObject1.chapinIOTypes.P}}</td>
+            <td>{{retrievedObject1.chapinIOTypes.P.length}}</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>{{retrievedObject1.chapinIOTypes.M}}</td>
+            <td>{{retrievedObject1.chapinIOTypes.M.length}}</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>{{retrievedObject1.chapinIOTypes.C}}</td>
+            <td>{{retrievedObject1.chapinIOTypes.C.length}}</td>
+          </tr>
+          <tr>
+            <td>T</td>
+            <td>{{retrievedObject1.chapinIOTypes.T}}</td>
+            <td>{{retrievedObject1.chapinIOTypes.T.length}}</td>
           </tr>
           </tbody>
           <tfoot>
