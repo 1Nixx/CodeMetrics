@@ -70,11 +70,18 @@ export class MainComponent {
     // @ts-ignore
     this.http.post<IChapinMetric>("https://localhost:5001/api/Chapin", this.code.trim())
       .subscribe(
-        (data) => {localStorage.setItem('key1', JSON.stringify(data)); this.router.navigate(['/chapinAndSpen'])});
-    // @ts-ignore
-    this.http.post<ISpenMetric>("https://localhost:5001/api/Spen", this.code.trim())
-      .subscribe(
-        (data) => {localStorage.setItem('key2', JSON.stringify(data)); this.router.navigate(['/chapinAndSpen'])});
+        (data) => {
+          localStorage.setItem('key1', JSON.stringify(data)); 
+          // @ts-ignore
+          this.http.post<ISpenMetric>("https://localhost:5001/api/Spen", this.code.trim()) 
+            .subscribe(
+              (data) => {
+                localStorage.setItem('key2', JSON.stringify(data)); 
+                this.router.navigate(['/chapinAndSpen'])
+              }
+            );
+        }
+      );
   }
 
 }
