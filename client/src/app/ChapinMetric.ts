@@ -1,5 +1,3 @@
-import * as internal from "stream";
-
 export interface ChapinTypesVariable {
   P: string[];
   M: string[];
@@ -16,7 +14,7 @@ export interface ChapinTypesCount {
 
 export interface IChapinMetric {
   chapinTypes: ChapinTypesVariable;
-  variableCount:  ChapinTypesCount;
+  variableCount: ChapinTypesCount;
   chapinIOTypes: ChapinTypesVariable;
   variableIOCount: ChapinTypesCount;
   metricResult: Number;

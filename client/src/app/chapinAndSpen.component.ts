@@ -1,11 +1,12 @@
 import {Component, Pipe, PipeTransform} from "@angular/core";
 import { Router } from "@angular/router";
+import {IChapinMetric} from "./ChapinMetric";
 
 @Component({
   selector: 'halsted-app',
   template: `
     <div class="box">
-      <i class="nameOfTheTable1">Spen</i>
+      <i class="nameOfTheTableSpen">Spen</i>
       <div class="table-scroll1" id="spen">
         <table>
           <thead>
@@ -23,31 +24,58 @@ import { Router } from "@angular/router";
           <tfoot>
           <tr>
             <th>Total</th>
-            <th></th>
+            <th>{{retrievedObject2.commonResult}}</th>
           </tr>
           </tfoot>
         </table>
       </div>
       <i class="nameOfTheTable2">Chepin's Full Metric</i>
-      <div class="table-scroll2">
+      <div class="table-scroll2" id="chapin">
         <table>
           <thead>
           <tr>
             <th>Group of variables</th>
             <th>Variables related to the group</th>
             <th>Number of variables in the group</th>
-            <th>Chepin's metric</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let item of retrievedObject1.chapinTypes | keyvalue">
             <td>{{item.key}}</td>
             <td>{{item.value}}</td>
+            <td>{{item.value.length}}</td>
+          </tr>
+          <th>Chepin's metric</th>
+          <th>Q = 1*{{retrievedObject1.chapinTypes.P.length}} + 2*{{retrievedObject1.chapinTypes.M.length}}
+              + 3*{{retrievedObject1.chapinTypes.C.length}} + 0.5*{{retrievedObject1.chapinTypes.T.length}} = {{retrievedObject1.metricResult}}
+          </th>
+          <th></th>
+          </tbody>
+        </table>
+      </div>
+      <i class="nameOfTheTable2" id="nameChapinIO">Chepin's input/output metric</i>
+      <div class="table-scroll2" id="chapinIO">
+        <table>
+          <thead>
+          <tr>
+            <th>Group of variables</th>
+            <th>Variables related to the group</th>
+            <th>Number of variables in the group</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of retrievedObject1.chapinIOTypes | keyvalue">
+            <td>{{item.key}}</td>
+            <td>{{item.value}}</td>
+            <td>{{item.value.length}}</td>
           </tr>
           </tbody>
           <tfoot>
           <tr>
-            <th>Total</th>
+            <th>Chepin's metric</th>
+            <th>Q = 1*{{retrievedObject1.chapinIOTypes.P.length}} + 2*{{retrievedObject1.chapinIOTypes.M.length}}
+              + 3*{{retrievedObject1.chapinIOTypes.C.length}} + 0.5*{{retrievedObject1.chapinIOTypes.T.length}} = {{retrievedObject1.metricIOResult}}
+            </th>
             <th></th>
           </tr>
           </tfoot>
@@ -60,7 +88,7 @@ import { Router } from "@angular/router";
 })
 
 export class ChapinAndSpenComponent {
-  retrievedObject1 = JSON.parse(<string>localStorage.getItem('key1'));
+  retrievedObject1: IChapinMetric = JSON.parse(<string>localStorage.getItem('key1'));
   retrievedObject2 = JSON.parse(<string>localStorage.getItem('key2'));
 
   // Returning to the page with the input of the code for calculating the Halstead metric

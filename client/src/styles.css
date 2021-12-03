@@ -153,6 +153,22 @@ body {
     left: 10%;
   }
 
+  #chapin {
+    left: 45%;
+    width: 900px;
+  }
+
+  #chapinIO {
+    left: 45%;
+    width: 900px;
+    top: 400px;
+  }
+
+  #nameChapinIO {
+    top: 350px;
+    left: 63%;
+  }
+
   .table-scroll2 {
     left: 53%;
   }
@@ -183,7 +199,7 @@ body {
     border-style: solid;
     border-width: 0 1px 1px 0;
     border-color: white;
-    word-break: break-all;
+    word-wrap: break-word;
   }
 
   .table-scroll1 thead th,
@@ -221,6 +237,15 @@ body {
     position: absolute;
     font-size: 25px;
     color: gray;
+  }
+
+  .nameOfTheTableSpen
+  {
+    position: absolute;
+    font-size: 25px;
+    color: gray;
+    left: 24%;
+    top: 7%;
   }
 
   .nameOfTheTable1 {
